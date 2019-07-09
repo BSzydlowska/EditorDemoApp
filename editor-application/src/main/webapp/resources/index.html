@@ -1,0 +1,81 @@
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th scope="col"></th>
+			<th scope="col"><a href="#/index"
+				data-ng-click="orderByField='name'; reverseSort = !reverseSort">Projekt</a></th>
+			<th scope="col"><a href="#/index"
+				data-ng-click="orderByField='h'; reverseSort = !reverseSort">Godziny</a></th>
+			<th scope="col"><a href="#/index"
+				data-ng-click="orderByField='amount'; reverseSort = !reverseSort">Kwota</a></th>
+			<th scope="col"><a href="#/index"
+				data-ng-click="orderByField='amountPerH'; reverseSort = !reverseSort">[zl/h]</a></th>
+			<th scope="col">Status</th>
+			<th scope="col"><input type="checkbox" data-ng_model="showComplete">
+				All</th>
+		</tr>
+	</thead>
+	<tbody data-ng-init="getHoursByProject()">
+		<tr
+			data-ng-repeat="item in projects | closedProjects:showComplete | orderBy:orderByField:reverseSort">
+			<td></td>
+			<td>{{item.name}}</td>
+			<td data-ng-init="item.h = getHoursByProject(item.id)">{{item.h}}</td>
+			<td>{{item.amount}}</td>
+			<td
+				data-ng-init="item.amountPerH = item.amount/getHoursByProject(item.id)">{{item.amountPerH
+				| number:2}}</td>
+			<td><input type="checkbox" data-ng-model="item.status"
+				data-ng-disabled="true" /></td>
+			<td>
+				<div class="btn-group">
+					<button class="btn btn-primary"
+						data-ng-disabled="item.status"
+						data-ng-click="passId(item.id); getProjectDetails(item.id)">Edit</button>
+					<button class="btn btn-primary"
+						data-ng-click="deleteProject(item.id)"
+						onClick="window.location.reload();">Delete</button>
+					<button class="btn btn-primary" ng-show="!item.status"
+						data-ng-click="closeOrOpenProject(item); getProjects()"
+						onClick="window.location.reload();">Close</button>
+					<button class="btn btn-primary" ng-show="item.status"
+						data-ng-click="closeOrOpenProject(item); getProjects()"
+						onClick="window.location.reload();">Open</button>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+
+</table>
+<form name="addProjectForm" action="">
+	<div>
+		<table class="table table-striped">
+			<thead class="thead-dark">
+				<tr>
+					<th scope="col"></th>
+					<th scope="col">Projekt</th>
+					<th scope="col">Godziny</th>
+					<th scope="col">Kwota</th>
+					<th scope="col">[zl/h]</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td></td>
+					<td scope="col"><input name="projName" type="text"
+						data-ng-model="proj.name" size="10" required></input></td>
+					<td><input type="text" data-ng-model="tempHours" size="8"></td>
+					<td><input name="projAmount" type="text"
+						data-ng-model="proj.amount" size="8" required></input></td>
+					<td>{{proj.amount/tempHours | number : 2}}</td>
+
+					<td><button class="btn btn-primary" ng-disabled="addProjectForm.$invalid" data-ng-model="proj"
+							data-ng-click="saveProject(proj); getProjects()"
+							onClick="window.location.reload()">Save</button></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</form>

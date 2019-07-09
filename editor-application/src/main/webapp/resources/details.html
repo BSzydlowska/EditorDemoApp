@@ -1,0 +1,28 @@
+<form name="addHoursForm">
+	<table class="table table-striped">
+		<thead class="">
+            <tr>
+                <th>Projekt</th>
+                <th>Godziny</th>
+                <th>Data</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody >
+            <tr data-ng-repeat="detail in details">
+                <td>{{detail.projectId}}</td>
+               	<td>{{detail.hours}}</td>
+               	<td>{{detail.date | date}}</td>
+            	<td><input type="button" class="btn btn-default" value="Delete"
+             	 	 data-ng-click="deleteProjectDetails(detail.id); getProjectDetails(detail.projectId)"></input></td>   		
+            </tr> 
+            <tr>
+                <td data-ng-init="newDetail.projectId = tempId">{{newDetail.projectId}}</td>
+               	<td><input type="number" size="6" data-ng-model="newDetail.hours" required></input></td>
+               	<td><input type="date" data-ng-model="newDetail.date" required></td>
+             		<td><button class="btn btn-default" data-ng-disabled="addHoursForm.$invalid" data-ng-model="newDetail"
+                		data-ng-click="updateProjectDetails(newDetail)" onClick="window.location.reload();">Add</button></td>
+        	</tr>
+		</tbody>
+	</table>
+</form>		
