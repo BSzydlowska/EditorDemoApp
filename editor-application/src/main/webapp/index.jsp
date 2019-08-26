@@ -22,7 +22,10 @@
 						})				
 					.when("/index", {
 						templateUrl : "resources/index.html"
-						});
+						})
+					.when("/addProjectForm",{
+						templateUrl : "resources/addProjectForm.html"
+					});
 			}])
 			.controller(
 					"editorCtrl",
@@ -36,7 +39,6 @@
 						$scope.getProjects = function() {
 							$http.get('${pageContext.request.contextPath}/api/projects')
 								.then(function(response) {
-									console.log(response.data)
 									$scope.projects = response.data;
 									$scope.proj = {};
 									$scope.proj.status = 0;
@@ -47,7 +49,6 @@
 						$scope.getHoursList = function(){
 							$http.get('${pageContext.request.contextPath}/api/hours')
 								.then(function(response){
-									console.log(response.data)
 									$scope.hours = response.data;		
 							});
 							
@@ -66,23 +67,23 @@
 						$scope.getProjectDetails = function(theId) {
 							$http.get('${pageContext.request.contextPath}/api/details/' + theId)
 								.then(function(response) {
-									console.log(response.data)
 									$scope.details = response.data;
 							});
 							$location.path("/details");
 						}
+						
+						$scope.addProjectForm = function() {
+							$location.path("/addProjectForm");
+						}
 
 						$scope.saveProject = function(proj) {
-							console.log(proj)
 							$http.post('${pageContext.request.contextPath}/api/projects', proj)
 								.then(function(response) {
 									console.log(response)
 								});
-							
 						}
 						
 						$scope.updateProjectDetails = function(detail) {
-							console.log(detail);
 							$http.post('${pageContext.request.contextPath}/api/details', detail)
 								.then(function(response) {
 									console.log(response)
@@ -90,7 +91,6 @@
 						}
 						
 						$scope.deleteProject = function(theId) {
-							console.log(theId);
 							$http.delete('${pageContext.request.contextPath}/api/deleteProject/' + theId)
 								.then(function(response){
 									console.log(respone)
@@ -98,7 +98,6 @@
 						}
 						
 						$scope.deleteProjectDetails = function(theDetailId) {
-							console.log(theDetailId);
 							$http.delete('${pageContext.request.contextPath}/api/deleteDetails/' + theDetailId)
 								.then(function(response){
 									console.log(response)

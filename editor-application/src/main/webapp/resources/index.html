@@ -4,11 +4,11 @@
 		<tr>
 			<th scope="col"></th>
 			<th scope="col"><a href="#/index"
-				data-ng-click="orderByField='name'; reverseSort = !reverseSort">Projekt</a></th>
+				data-ng-click="orderByField='name'; reverseSort = !reverseSort">Project</a></th>
 			<th scope="col"><a href="#/index"
-				data-ng-click="orderByField='h'; reverseSort = !reverseSort">Godziny</a></th>
+				data-ng-click="orderByField='h'; reverseSort = !reverseSort">Hours</a></th>
 			<th scope="col"><a href="#/index"
-				data-ng-click="orderByField='amount'; reverseSort = !reverseSort">Kwota</a></th>
+				data-ng-click="orderByField='amount'; reverseSort = !reverseSort">Amount</a></th>
 			<th scope="col"><a href="#/index"
 				data-ng-click="orderByField='amountPerH'; reverseSort = !reverseSort">[zl/h]</a></th>
 			<th scope="col">Status</th>
@@ -46,36 +46,7 @@
 			</td>
 		</tr>
 	</tbody>
-
+	
 </table>
-<form name="addProjectForm" action="">
-	<div>
-		<table class="table table-striped">
-			<thead class="thead-dark">
-				<tr>
-					<th scope="col"></th>
-					<th scope="col">Projekt</th>
-					<th scope="col">Godziny</th>
-					<th scope="col">Kwota</th>
-					<th scope="col">[zl/h]</th>
 
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td></td>
-					<td scope="col"><input name="projName" type="text"
-						data-ng-model="proj.name" size="10" required></input></td>
-					<td><input type="text" data-ng-model="tempHours" size="8"></td>
-					<td><input name="projAmount" type="text"
-						data-ng-model="proj.amount" size="8" required></input></td>
-					<td>{{proj.amount/tempHours | number : 2}}</td>
-
-					<td><button class="btn btn-primary" ng-disabled="addProjectForm.$invalid" data-ng-model="proj"
-							data-ng-click="saveProject(proj); getProjects()"
-							onClick="window.location.reload()">Save</button></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-</form>
+<button class="btn btn-primary" data-ng-click="addProjectForm()">Add Project</button>

@@ -2,9 +2,9 @@
 	<table class="table table-striped">
 		<thead class="">
             <tr>
-                <th>Projekt</th>
-                <th>Godziny</th>
-                <th>Data</th>
+                <th>Project</th>
+                <th>Hours</th>
+                <th>Date</th>
                 <th></th>
             </tr>
         </thead>
@@ -12,7 +12,7 @@
             <tr data-ng-repeat="detail in details">
                 <td>{{detail.projectId}}</td>
                	<td>{{detail.hours}}</td>
-               	<td>{{detail.date | date}}</td>
+               	<td>{{detail.date | date:'dd/MM/yyyy'}}</td>
             	<td><input type="button" class="btn btn-default" value="Delete"
              	 	 data-ng-click="deleteProjectDetails(detail.id); getProjectDetails(detail.projectId)"></input></td>   		
             </tr> 

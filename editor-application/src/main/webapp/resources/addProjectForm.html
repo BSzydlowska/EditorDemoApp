@@ -1,0 +1,35 @@
+<form name="addProjectForm">
+		<table class="table table-striped">
+			<thead class="thead-dark">
+				<tr>
+					<th scope="col"></th>
+					<th scope="col">Project</th>
+					<th scope="col">Hours</th>
+					<th scope="col">Amount</th>
+					<th scope="col">[zl/h]</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td></td>
+					<td scope="col"><input name="projName" type="text"
+						data-ng-model="proj.name" size="10" required></input></td>
+					<td><input type="text" data-ng-model="tempHours" size="8"></td>
+					<td><input name="projAmount" type="text"
+						data-ng-model="proj.amount" size="8" required></input></td>
+					<td>{{proj.amount/tempHours | number : 2}}</td>
+
+					<td>
+					 <div class="btn-group">
+					 	<button class="btn btn-primary" data-ng-disabled="addProjectForm.$invalid" data-ng-model="proj"
+							data-ng-click="saveProject(proj); getProjects()"
+							onClick="window.location.reload()">Add</button>
+						<button class="btn btn-primary" 
+							onClick="window.location.reload()">Cancel</button>
+					</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+</form>
